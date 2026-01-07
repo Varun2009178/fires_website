@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Ignis Project",
-  description: "Wildfire intelligence program using satellite imagery, sensors, and ML to predict ignition risk before flames spread.",
+  title: "FIRES | Fire Intelligence & Risk Evaluation System",
+  description: "FIRES is a wildfire intelligence layer that blends satellite imagery, weather, and historical fire behavior to flag ignition risk early and guide mitigation.",
   icons: {
-    icon: "/80f52779-bf93-41f1-a03b-13557de35130.png",
+    icon: "/fires_logo.png",
   },
 };
 
