@@ -1,346 +1,289 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import Image from "next/image";
 
-const values = [
+const teamMembers = [
   {
-    title: "Mission",
-    body:
-      "FIRES (Fire Intelligence & Risk Evaluation System) protects communities by warning about ignition risk early enough to act.",
+    name: "Varun Nukala",
+    role: "ML & Technical Lead",
+    bio: "Trains the models, tunes the algorithms, debugs satellite data at 2am.",
   },
   {
-    title: "Vision",
-    body:
-      "A world where wildfire response is pre positioned and not reactive. Ground crews, NGOs, and residents all see the same trusted risk signal.",
+    name: "Nick Chen",
+    role: "Systems & Strategy",
+    bio: "System architecture, deployment, making sure fire agencies can actually use what we build.",
   },
-  {
-    title: "Values",
-    body:
-      "Science first, transparent about model limits, accountable to the communities we serve, and built with safety over hype.",
-  },
-];
-
-const judgeSnapshot = [
-  { label: "What", detail: "Predict ignition risk from satellite imagery + weather" },
-  { label: "How", detail: "Trained ML model scoring tiles High / Elevated / Stable" },
-  { label: "Proof", detail: "Based on real satellite scenes; wireframes show UX" },
 ];
 
 const timelineData = [
   {
-    title: "Phase 1: Multi-Source Data Ingestion",
-    description: "FIRES pulls high-resolution satellite scenes and merges them with localized weather patterns and vegetation health indices.",
+    title: "Gathering the data",
+    description: "Satellite imagery combined with real-time weather and vegetation health data.",
     video: "/conrad_vids/recording_1.mov",
-    tag: "Data Layer",
+    step: "01",
   },
   {
-    title: "Phase 2: Neural Intelligence Processing",
-    description: "Our core model evaluates every tile, cross-referencing thermal anomalies with historical fire behavior to predict ignition likelihood.",
+    title: "Running predictions",
+    description: "ML model analyzes thermal patterns against historical fire behavior.",
     video: "/conrad_vids/recording_2.mov",
-    tag: "AI Model",
+    step: "02",
   },
   {
-    title: "Phase 3: Risk Output & Mitigation",
-    description: "The system generates clear risk tiers and delivers actionable protocols to responders and residents in the high-risk zones.",
+    title: "Delivering warnings",
+    description: "High-risk areas flagged with clear alerts to agencies and residents.",
     video: "/conrad_vids/recording_3.mov",
-    tag: "Action",
+    step: "03",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pb-24">
-        <nav className="sticky top-0 z-20 flex items-center justify-between border-b border-border/50 bg-background/80 py-4 backdrop-blur-md">
-          <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-primary/10">
-              <Image 
-                src="/fires_logo.png" 
-                alt="FIRES Logo" 
-                fill 
-                className="object-contain"
-              />
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-3">
+            <div className="relative h-9 w-9 overflow-hidden rounded-lg">
+              <Image src="/fires_logo.png" alt="FIRES" fill className="object-contain" />
             </div>
-            <div>
-              <div className="text-lg font-semibold leading-tight">FIRES</div>
-              <p className="text-xs text-muted-foreground">Fire Intelligence & Risk Evaluation System</p>
-            </div>
+            <span className="font-semibold text-lg">FIRES</span>
+          </a>
+          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+            <a href="#how" className="hover:text-foreground transition-colors">How it works</a>
+            <a href="#model" className="hover:text-foreground transition-colors">The model</a>
+            <a href="#team" className="hover:text-foreground transition-colors">Team</a>
+            <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-sm">
-            <a className="hover:text-primary transition-colors" href="#mission">
-              Mission
-            </a>
-            <a className="hover:text-primary transition-colors" href="#innovation">
-              Innovation
-            </a>
-            <a className="hover:text-primary transition-colors" href="#timeline">
-              Timeline
-            </a>
-            <a className="hover:text-primary transition-colors" href="#brand">
-              Brand
-            </a>
-            <Button asChild size="sm">
-              <a href="#contact">Contact</a>
-            </Button>
-          </div>
-        </nav>
+        </div>
+      </nav>
 
-        <header className="pt-12 pb-10 text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/10 text-sm font-semibold text-primary">
-            Built for wildfire readiness: honest, conceptual wireframe
-          </div>
-          <div className="space-y-6">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Predict ignition risk. Move resources early. Protect people.
+      <main className="max-w-5xl mx-auto px-6">
+        {/* Hero */}
+        <section className="py-24 md:py-32">
+          <div className="max-w-3xl">
+            <p className="text-primary font-medium mb-4">Forest Ignition & Risk Evaluation System</p>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+              What if we could see fires before they start?
             </h1>
-            <p className="mx-auto max-w-3xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-              FIRES blends satellite imagery, weather, and historical fire behavior to flag ignition risk before
-              flames start. The visuals below are a designed representation of the intended experience, based on a working model
-              tested on real satellite data.
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              FIRES uses satellite imagery, weather data, and machine learning to predict where wildfires
+              are most likely to ignite giving communities time to prepare instead of react.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="min-w-[180px]" asChild>
-                <a href="#timeline">Explore timeline model</a>
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg" asChild>
+                <a href="#how">See how it works</a>
               </Button>
-              <Button size="lg" variant="outline" className="min-w-[180px]" asChild>
+              <Button size="lg" variant="outline" asChild>
                 <a href="https://youtu.be/L7ZsfeYUwg0" target="_blank" rel="noopener noreferrer">
-                  Watch concept video
+                  Watch video
                 </a>
               </Button>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-            {judgeSnapshot.map((item) => (
-              <Card key={item.label} className="p-5 space-y-2">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">{item.label}</p>
-                <p className="text-base font-semibold text-foreground leading-snug">{item.detail}</p>
-              </Card>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
-            <Card className="p-5">
-              <p className="text-sm text-muted-foreground">Model status</p>
-              <p className="text-2xl font-semibold text-primary">Trained & tested</p>
-              <p className="text-sm text-muted-foreground">Built on real satellite scenes</p>
-            </Card>
-            <Card className="p-5">
-              <p className="text-sm text-muted-foreground">Deployment</p>
-              <p className="text-2xl font-semibold text-primary">Web link</p>
-              <p className="text-sm text-muted-foreground">Accessible via direct URL for judges</p>
-            </Card>
-            <Card className="p-5">
-              <p className="text-sm text-muted-foreground">Honesty note</p>
-              <p className="text-2xl font-semibold text-primary">Concept UI</p>
-              <p className="text-sm text-muted-foreground">Screens illustrate intended UX</p>
-            </Card>
-          </div>
-        </header>
-
-        <section id="mission" className="space-y-6 pb-12">
-          <div className="flex items-center justify-between">
-            <h2 className="text-3xl font-bold">Mission, vision, and values</h2>
-            <span className="text-sm text-muted-foreground">Why FIRES exists</span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {values.map((item) => (
-              <Card key={item.title} className="p-6 space-y-3">
-                <p className="text-sm font-semibold text-primary">{item.title}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
-              </Card>
-            ))}
-          </div>
         </section>
 
-        <section className="pb-12 border-t pt-12">
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="flex-1 space-y-6">
-              <h2 className="text-3xl font-bold">Concept Video</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                See the origins and core concept of FIRES. This video demonstrates the initial vision for a wildfire intelligence layer that protects communities through space based prediction.
-              </p>
-              <Button asChild size="lg">
-                <a href="https://youtu.be/L7ZsfeYUwg0" target="_blank" rel="noopener noreferrer">
-                  Open video on YouTube
-                </a>
-              </Button>
-            </div>
-            <div className="flex-1 w-full">
-              <a 
-                href="https://youtu.be/L7ZsfeYUwg0" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group relative block aspect-video overflow-hidden rounded-2xl bg-muted shadow-2xl transition-all hover:scale-[1.02]"
-              >
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors z-10">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-xl transition-transform group-hover:scale-110">
-                    <svg className="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="absolute bottom-4 left-4 right-4 z-20">
-                  <p className="text-white text-sm font-semibold drop-shadow-md">FIRES Concept Video — Watch Now</p>
-                </div>
-                <div className="h-full w-full bg-gradient-to-br from-orange-500/20 to-slate-900/40" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section id="innovation" className="space-y-8 pb-12">
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="flex-1 space-y-6">
-              <h2 className="text-4xl font-bold">Model of the innovation</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                FIRES isn&apos;t just a map. It&apos;s a multi layered intelligence engine. We built our wireframe to mirror the technical architecture:
-              </p>
-              <div className="space-y-4">
-                <Card className="p-4 border-l-4 border-l-primary">
-                  <h3 className="font-semibold text-foreground">Explainable AI</h3>
-                  <p className="text-sm text-muted-foreground">Every risk score is backed by the specific environmental data that triggered it, so fire marshals can trust the signal.</p>
-                </Card>
-                <Card className="p-4 border-l-4 border-l-primary">
-                  <h3 className="font-semibold text-foreground">Resource Optimization</h3>
-                  <p className="text-sm text-muted-foreground">By predicting risk *before* ignition, we enable agencies to pre position crews, saving critical response time and millions in damages.</p>
-                </Card>
-                <Card className="p-4 border-l-4 border-l-primary">
-                  <h3 className="font-semibold text-foreground">Scalable Architecture</h3>
-                  <p className="text-sm text-muted-foreground">Built to ingest global satellite passes, the system model allows for rapid deployment to any fire prone ecosystem on Earth.</p>
-                </Card>
-              </div>
-            </div>
-            <div className="flex-1 w-full">
-              <Card className="overflow-hidden bg-muted/30">
-                <div className="p-3 text-center border-b bg-muted/50">
-                  <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Technical System Model</span>
-                </div>
-                <div className="relative aspect-video">
-                  <Image 
-                    src="/wireframe_model.png" 
-                    alt="The technical architecture and model flow of FIRES"
-                    fill
-                    className="object-contain p-4"
-                  />
-                </div>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        <section id="timeline" className="space-y-12 pb-12 border-t pt-12">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl font-bold">Actual Timeline Model</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Follow the journey of a data point as it moves through the FIRES intelligence layer.
+        <section className="py-16 border-t border-border/40">
+          <div className="max-w-3xl">
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Current fire response systems typically activate after ignition occurs. We are
+              developing a system that analyzes satellite data and weather patterns to identify
+              high-risk areas before fires begin.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Our approach combines satellite imagery with weather data and processes it through
+              a machine learning model to provide early warnings when conditions indicate elevated
+              fire risk. This leverages existing data sources to create actionable intelligence.
             </p>
           </div>
+        </section>
 
-          <div className="space-y-24">
+        <section id="how" className="py-16 border-t border-border/40">
+          <h2 className="text-2xl font-bold mb-12">How it works</h2>
+
+          <div className="space-y-20">
             {timelineData.map((step, index) => (
-              <div 
-                key={step.title} 
-                className={`flex flex-col md:flex-row gap-12 items-center ${
+              <div
+                key={step.step}
+                className={`flex flex-col md:flex-row gap-10 items-center ${
                   index % 2 === 1 ? "md:flex-row-reverse" : ""
                 }`}
               >
-                <div className="flex-1 space-y-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-                    {step.tag}
+                <div className="flex-1 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-4xl font-bold text-primary/20">{step.step}</span>
+                    <h3 className="text-xl font-semibold">{step.title}</h3>
                   </div>
-                  <h3 className="text-3xl font-bold">{step.title}</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
+                  <p className="text-muted-foreground leading-relaxed">{step.description}</p>
                 </div>
                 <div className="flex-1 w-full">
-                  <Card className="overflow-hidden bg-black shadow-2xl">
-                    <div className="relative aspect-video">
-                      <video
-                        src={step.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  </Card>
+                  <div className="aspect-video rounded-xl overflow-hidden bg-black">
+                    <video
+                      src={step.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="brand" className="space-y-6 pb-12 border-t pt-12">
-          <div className="flex items-center justify-between">
-            <h2 className="text-3xl font-bold">Brand Identity</h2>
-            <span className="text-sm text-muted-foreground">The FIRES Persona</span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="p-6 space-y-3">
-              <h3 className="font-semibold text-primary">Name & Logo</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                <span className="font-bold text-foreground">FIRES</span>: Fire Intelligence & Risk Evaluation System. Our brand name is an acronym that clearly states our technical purpose. Our logo (seen in the navigation bar) combines a minimalist flame with a satellite map pin to represent "space down protection."
-              </p>
-            </Card>
-            <Card className="p-6 space-y-3">
-              <h3 className="font-semibold text-primary">Color Scheme</h3>
-              <div className="space-y-3">
+        <section id="model" className="py-16 border-t border-border/40">
+          <h2 className="text-2xl font-bold mb-4">The model</h2>
+          <p className="text-muted-foreground leading-relaxed mb-10 max-w-2xl">
+            We trained a deep learning system on 40,000 satellite images from the Canadian Wildlife
+            Ministry. The model achieved 96.2% validation accuracy in classifying wildfire risk.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="space-y-8">
+              <div>
+                <h3 className="font-semibold mb-2">Feature extraction</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Our palette is built for high stress legibility:
+                  MobileNet CNN extracts visual features from 350×350px satellite imagery, including
+                  vegetation density, land texture, and thermal patterns. The architecture is
+                  lightweight enough for real-time analysis while maintaining accuracy.
                 </p>
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="h-8 w-8 rounded-full border bg-[#f97316]" />
-                    <span className="text-[10px] font-mono uppercase">#f97316</span>
+              </div>
+
+              <div>
+                <h3 className="font-semibold mb-2">Classification</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  We evaluated three classifiers: Multilayer Perceptron (MLP), K-Nearest Neighbors,
+                  and Random Forest. The optimized MLP achieved 96.2% validation accuracy, providing
+                  the best balance of precision and recall for wildfire detection.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold mb-3">Performance</h3>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <p className="text-2xl font-bold text-primary">96.2%</p>
+                    <p className="text-xs text-muted-foreground">MLP accuracy</p>
                   </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="h-8 w-8 rounded-full border bg-[#0f172a]" />
-                    <span className="text-[10px] font-mono uppercase">#0f172a</span>
+                  <div>
+                    <p className="text-2xl font-bold text-primary">40k</p>
+                    <p className="text-xs text-muted-foreground">training images</p>
                   </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="h-8 w-8 rounded-full border bg-[#f9fafb]" />
-                    <span className="text-[10px] font-mono uppercase">#f9fafb</span>
+                  <div>
+                    <p className="text-2xl font-bold text-primary">350px</p>
+                    <p className="text-xs text-muted-foreground">resolution</p>
                   </div>
                 </div>
               </div>
-            </Card>
-            <Card className="p-6 space-y-3">
-              <h3 className="font-semibold text-primary">Voice & Design</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Our voice is <span className="font-bold text-foreground">Scientific, Responsible, and Calm.</span> We avoid alarmism, focusing instead on data driven action. Our design uses "clean space" and clear hierarchical typography to ensure responders can find critical info in seconds.
-              </p>
-            </Card>
-          </div>
-        </section>
 
-        <section id="contact" className="space-y-6 pb-16">
-          <div className="flex items-center justify-between">
-            <h2 className="text-3xl font-bold">Contact & access</h2>
-            <span className="text-sm text-muted-foreground">Public link only</span>
-          </div>
-          <Card className="p-6 space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-              <div className="space-y-2">
-                <p className="text-sm font-semibold text-primary">Email</p>
-                <p className="text-sm text-muted-foreground">varun.k.nukala@gmail.com | nickchen28.finance@gmail.com</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-sm font-semibold text-primary">What to include</p>
-                <p className="text-sm text-muted-foreground">
-                  Region of interest, current monitoring tools, and any satellite sources you use so we can tailor the response.
+              <div>
+                <h3 className="font-semibold mb-2">Why it matters</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Most systems rely on weather and historical data. Our approach also incorporates
+                  visual patterns from satellite imagery, including dry vegetation, thermal anomalies,
+                  and land cover changes, providing a more complete assessment of fire risk.
                 </p>
               </div>
             </div>
-          </Card>
+
+            <div className="space-y-6">
+              <div className="rounded-xl overflow-hidden border border-border/40 bg-muted/20">
+                <div className="relative aspect-video">
+                  <Image
+                    src="/wireframe_model.png"
+                    alt="FIRES technical architecture"
+                    fill
+                    className="object-contain p-6"
+                  />
+                </div>
+              </div>
+              <div className="text-xs text-muted-foreground space-y-1">
+                <p><span className="text-foreground font-medium">Data:</span> Canadian Wildlife Ministry satellite imagery</p>
+                <p><span className="text-foreground font-medium">Split:</span> 70% training, 15% validation, 15% test</p>
+                <p><span className="text-foreground font-medium">Stack:</span> TensorFlow, scikit-learn, NumPy, Pandas</p>
+              </div>
+            </div>
+          </div>
         </section>
-      </div>
+
+        <section id="team" className="py-16 border-t border-border/40">
+          <h2 className="text-2xl font-bold mb-12">About us</h2>
+
+          <div className="grid md:grid-cols-5 gap-10 items-start">
+            <div className="md:col-span-2">
+              <div className="rounded-xl overflow-hidden">
+                <div className="relative aspect-[3/4]">
+                  <Image
+                    src="/team_photo_conrad.png"
+                    alt="Varun Nukala and Nick Chen"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="md:col-span-3 space-y-6">
+              <p className="text-muted-foreground leading-relaxed">
+                We are two students working on early wildfire detection. We began this project
+                after gaining access to satellite data and recognizing an opportunity to apply
+                machine learning to fire risk prediction.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                The model is trained and validated, the data pipeline is operational, and we have
+                developed wireframes for the user interface. We continue to refine and expand
+                the system based on testing and feedback.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                {teamMembers.map((member) => (
+                  <div key={member.name} className="space-y-1">
+                    <h3 className="font-semibold">{member.name}</h3>
+                    <p className="text-sm text-primary">{member.role}</p>
+                    <p className="text-sm text-muted-foreground">{member.bio}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 border-t border-border/40">
+          <div className="max-w-2xl">
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              FIRES stands for Forest Ignition and Risk Evaluation System. The design uses orange
+              to convey urgency without causing alarm, and maintains simplicity to ensure usability
+              during critical situations.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Our communication approach prioritizes clarity and data presentation. We focus on
+              presenting model outputs transparently, allowing users to make informed decisions
+              based on the information provided.
+            </p>
+          </div>
+        </section>
+
+        <section id="contact" className="py-16 border-t border-border/40">
+          <div className="max-w-xl">
+            <h2 className="text-2xl font-bold mb-4">Contact</h2>
+            <p className="text-muted-foreground mb-6">
+              For questions about FIRES or collaboration opportunities, please contact us.
+            </p>
+            <div className="space-y-2">
+              <p className="font-mono text-sm">varun.k.nukala@gmail.com</p>
+              <p className="font-mono text-sm">nickchen28.finance@gmail.com</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-border/40 py-8">
+        <div className="max-w-5xl mx-auto px-6 text-sm text-muted-foreground">
+          <p>FIRES Forest Ignition and Risk Evaluation System</p>
+        </div>
+      </footer>
     </div>
   );
 }

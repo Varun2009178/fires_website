@@ -13,10 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FIRES | Fire Intelligence & Risk Evaluation System",
+  title: "FIRES | Forest Ignition and Risk Evaluation System",
   description: "FIRES is a wildfire intelligence layer that blends satellite imagery, weather, and historical fire behavior to flag ignition risk early and guide mitigation.",
   icons: {
-    icon: "/fires_logo.png",
+    icon: [
+      { url: "/fires_logo.png", type: "image/png" },
+    ],
+    apple: "/fires_logo.png",
   },
 };
 
